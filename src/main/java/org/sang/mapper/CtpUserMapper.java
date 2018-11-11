@@ -3,6 +3,9 @@ package org.sang.mapper;
 import org.sang.bean.CtpUser;
 
 public interface CtpUserMapper {
+
+    CtpUser loadUserByUsername(String username);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(CtpUser record);

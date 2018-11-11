@@ -1,6 +1,15 @@
 package org.sang.bean;
 
-public class CtpUser {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class CtpUser  implements UserDetails {
     private Integer id;
 
     private String name;
@@ -12,6 +21,8 @@ public class CtpUser {
     private String address;
 
     private Byte status;
+
+    private List<Role> roles;
 
     private String username;
 
@@ -32,6 +43,50 @@ public class CtpUser {
     private String remark4;
 
     private String remark5;
+
+    @Override
+    public boolean isEnabled() {
+        if(status.intValue() == 0)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    @JsonIgnore
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
+
+    @JsonIgnore
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
 
     public Integer getId() {
         return id;
@@ -85,12 +140,16 @@ public class CtpUser {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public String getPassword() {
-        return password;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {

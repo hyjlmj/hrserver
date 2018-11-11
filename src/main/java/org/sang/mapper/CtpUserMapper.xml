@@ -19,6 +19,28 @@
     <result column="remark4" property="remark4" jdbcType="VARCHAR" />
     <result column="remark5" property="remark5" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="lazyLoadRoles" type="org.sang.bean.CtpUser" extends="BaseResultMap">
+    <collection property="roles" ofType="org.sang.bean.Role" select="org.sang.mapper.CtpUserMapper.getRolesByHrId"
+                column="id"></collection>
+  </resultMap>
+
+  <resultMap id="eagerLoadRoles" type="org.sang.bean.CtpUser" extends="BaseResultMap">
+    <collection property="roles" ofType="org.sang.bean.Role">
+      <id property="id" column="rid"/>
+      <result property="name" column="rname"/>
+      <result property="nameZh" column="rnameZh"/>
+    </collection>
+  </resultMap>
+
+  <select id="getRolesByHrId" resultType="org.sang.bean.Role">
+        SELECT r.* FROM hr_role h,role r where h.rid=r.id AND h.hrid=#{id}
+    </select>
+
+  <select id="loadUserByUsername" resultMap="lazyLoadRoles">
+        select * from ctp_users WHERE username=#{username};
+    </select>
+
   <sql id="Base_Column_List" >
     id, name, phone, telephone, address, status, username, password, branchid, userface, 
     remark, remark1, remark2, remark3, remark4, remark5
