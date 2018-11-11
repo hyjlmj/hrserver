@@ -2,7 +2,6 @@ package org.sang.controller.system;
 
 import org.sang.bean.Hr;
 import org.sang.bean.RespBean;
-import org.sang.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
