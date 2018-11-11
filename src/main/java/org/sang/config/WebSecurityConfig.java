@@ -2,7 +2,7 @@ package org.sang.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.sang.bean.RespBean;
-import org.sang.common.HrUtils;
+import org.sang.common.CtpUserUtils;
 import org.sang.service.CtpUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -98,7 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                     HttpServletResponse resp,
                                     Authentication auth) throws IOException {
             resp.setContentType("application/json;charset=utf-8");
-            RespBean respBean = RespBean.ok("登录成功!", HrUtils.getCurrentHr());
+            RespBean respBean = RespBean.ok("登录成功!", CtpUserUtils.getCurrentHr());
             ObjectMapper om = new ObjectMapper();
             PrintWriter out = resp.getWriter();
             out.write(om.writeValueAsString(respBean));

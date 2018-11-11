@@ -34,7 +34,7 @@
   </resultMap>
 
   <select id="getRolesByHrId" resultType="org.sang.bean.Role">
-        SELECT r.* FROM hr_role h,role r where h.rid=r.id AND h.hrid=#{id}
+        SELECT r.* FROM ctp_user_role_nls h,role r where h.userid=r.id AND h.userid=#{id}
     </select>
 
   <select id="loadUserByUsername" resultMap="lazyLoadRoles">
