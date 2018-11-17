@@ -22,8 +22,8 @@ import java.util.List;
 public class ChatController {
 //    @Autowired
 //    HrService hrService;
-//    @Autowired
-//    SysMsgService sysMsgService;
+    @Autowired
+    SysMsgService sysMsgService;
 //
 //    @RequestMapping(value = "/hrs", method = RequestMethod.GET)
 //    public List<Hr> getAllHr() {
@@ -38,10 +38,10 @@ public class ChatController {
 //        return RespBean.error("发送失败!");
 //    }
 //
-//    @RequestMapping("/sysmsgs")
-//    public List<SysMsg> getSysMsg(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) {
-//        return sysMsgService.getSysMsgByPage(page, size);
-//    }
+    @RequestMapping("/sysmsgs")
+    public List<SysMsg> getSysMsg(@RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        return sysMsgService.getSysMsgByPage(page, size);
+    }
 //
 //    @RequestMapping(value = "/markread", method = RequestMethod.PUT)
 //    public RespBean markRead(Long flag) {
