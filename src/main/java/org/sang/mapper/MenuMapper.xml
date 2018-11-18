@@ -12,6 +12,7 @@
         <result column="iconCls" property="iconCls" jdbcType="VARCHAR"/>
         <result column="keepAlive" property="keepAlive" jdbcType="BIT"/>
         <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+        <result column="enabled" property="enabled"  />
         <association property="meta" javaType="org.sang.bean.MenuMeta">
             <result column="keepAlive" property="keepAlive"/>
             <result column="requireAuth" property="requireAuth"/>
@@ -49,4 +50,15 @@
     <select id="getMenusByRid" resultType="Long">
         SELECT mid from menu_role WHERE rid=#{rid}
     </select>
+
+    <select id="selectMenuByPage" resultMap="BaseResultMap">
+
+        select * from menu m where 1=1
+        <if test="name != null" >
+            and m.`name` = like concat('%',#{name},'%')
+        </if>
+        ORDER BY m.id limit #{start},#{size}
+
+    </select>
+
 </mapper>

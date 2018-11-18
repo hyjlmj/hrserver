@@ -99,4 +99,6 @@
             WHERE id !=#{currentId}
         </if>
     </select>
+
+
 </mapper>

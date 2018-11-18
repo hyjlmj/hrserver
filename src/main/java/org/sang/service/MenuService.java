@@ -1,5 +1,6 @@
 package org.sang.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.sang.bean.Menu;
 import org.sang.common.CtpUserUtils;
 import org.sang.mapper.MenuMapper;
@@ -36,4 +37,6 @@ public class MenuService {
     public List<Long> getMenusByRid(Long rid) {
         return menuMapper.getMenusByRid(rid);
     }
+
+    List<Menu> selectMenuByPage( int start , int size, String name) {return menuMapper.selectMenuByPage(start,size,name); }
 }
