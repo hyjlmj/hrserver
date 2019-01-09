@@ -98,6 +98,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                     HttpServletResponse resp,
                                     Authentication auth) throws IOException {
             resp.setContentType("application/json;charset=utf-8");
+
+            CorsFilter.ChangeResponse changeResponse = new CorsFilter.ChangeResponse((HttpServletRequest) req, (HttpServletResponse) resp).invoke();
+            resp = changeResponse.getResponse();
             RespBean respBean = RespBean.ok("登录成功!", CtpUserUtils.getCurrentHr());
             ObjectMapper om = new ObjectMapper();
             PrintWriter out = resp.getWriter();
